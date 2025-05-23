@@ -1,0 +1,34 @@
+<div class="min-h-screen flex items-center justify-center bg-[var(--color-bg-secondary)]">
+  <div class="p-6 bg-[var(--color-bg-primary)] border-[var(--color-border-default)] border rounded shadow w-sm max-w-xl mx-auto">
+    <h2 class="text-xl font-semibold mb-6">¿Tienes dudas? <span class="text-sm text-gray-500 block">Escríbenos por aquí</span></h2>
+
+    <div class="space-y-4">
+      <input
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+        placeholder="Tu nombre"
+        class="w-full border border-[var(--color-border-default)] rounded p-3 placeholder-gray-400"
+      />
+
+      <textarea
+        [ngModel]="message()"
+        (ngModelChange)="message.set($event)"
+        placeholder="Escribe tu mensaje aquí..."
+        class="w-full border border-[var(--color-border-default)] rounded p-3 h-28 resize-none placeholder-gray-400"
+      ></textarea>
+
+      <button
+        (click)="sendMessage()"
+        class="w-full text-center bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-700)] text-white font-medium py-3 rounded transition-colors"
+      >
+        Enviar Mensaje
+      </button>
+    </div>
+
+    <ul class="mt-6 space-y-2">
+      <li *ngFor="let msg of chatService.messages()" class="text-sm text-gray-800 bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] p-3 rounded">
+        {{ msg.sender + ' ('+ (msg.timestamp | date)  + ')' + ': ' + msg.message }}
+      </li>
+    </ul>
+  </div>
+</div>
